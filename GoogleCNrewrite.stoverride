@@ -1,5 +1,5 @@
-name: Google CN 302 rewrite
-desc: google cn 302 rewrite to google com
+name: GoogleCNrewrite
+desc: Rewrite google.cn to google.com
 http:
   url-rewrite:
     - ^https://www.google.cn https://www.google.com 302
