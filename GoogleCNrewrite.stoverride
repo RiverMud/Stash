@@ -3,5 +3,9 @@ desc: Rewrite google.cn to google.com
 icon: https://img.icons8.com/color/800/google-logo.png
 
 http:
+  mitm:
+    - www.google.cn
+  force-http-engine:
+    - www.google.cn
   url-rewrite:
     - ^https://www.google.cn https://www.google.com 302
