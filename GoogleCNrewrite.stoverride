@@ -1,5 +1,6 @@
 name: GoogleCNrewrite
 desc: Rewrite google.cn to google.com
+icon: https://www.google.com/favicon.ico
 http:
   url-rewrite:
     - ^https://www.google.cn https://www.google.com 302
