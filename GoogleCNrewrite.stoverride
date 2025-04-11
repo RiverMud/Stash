@@ -2,7 +2,7 @@ name: GoogleCNrewrite
 desc: Rewrite google.cn to google.com
 icon: https://img.icons8.com/color/800/google-logo.png
 mitm:
-    - www.google.com
+    - www.google.cn
 http:
   url-rewrite:
     - ^https://www.google.cn https://www.google.com 302
