@@ -1,8 +1,7 @@
 name: GoogleCNrewrite
 desc: Rewrite google.cn to google.com
-author: @RiverMud
 icon: https://img.icons8.com/color/800/google-logo.png
 
 http:
-  - url-rewrite:
+  url-rewrite:
     - ^https://www.google.cn https://www.google.com 302
