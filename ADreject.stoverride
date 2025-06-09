@@ -1,0 +1,13 @@
+name: ADreject
+desc: Reject AD url.
+icon: https://img.icons8.com/ios-filled/800/FA5252/cancel.png
+
+rule-providers:
+  AD-domain:
+    behavior: domain
+    format: yaml
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt
+    interval: 86400
+
+rules:
+  - RULE-SET,AD-domain,REJECT
