@@ -1,6 +1,7 @@
 name: GoogleCNrewrite
 desc: Rewrite google.cn to google.com
 icon: https://img.icons8.com/color/800/google-logo.png
+category:"RiverMud"
 
 http:
   url-rewrite:
