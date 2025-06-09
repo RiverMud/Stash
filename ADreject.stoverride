@@ -1,5 +1,5 @@
 name: ADreject
-desc: Reject AD url.
+desc: Reject AD urls.
 icon: https://img.icons8.com/ios-filled/800/FA5252/cancel.png
 
 rule-providers:
