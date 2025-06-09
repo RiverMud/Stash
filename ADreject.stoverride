@@ -1,6 +1,7 @@
 name: ADreject
 desc: Reject AD urls.
 icon: https://img.icons8.com/ios-filled/800/FA5252/cancel.png
+category:"RiverMud"
 
 rule-providers:
   AD-domain:
