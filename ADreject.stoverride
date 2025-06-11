@@ -7,7 +7,7 @@ rule-providers:
   AD-domain:
     behavior: domain
     format: yaml
-    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt
+    url: https://cdn.jsdmirror.cn/gh/Loyalsoldier/clash-rules@release/reject.txt
     interval: 86400
 
 rules:
