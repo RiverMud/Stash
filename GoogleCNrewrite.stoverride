@@ -1,6 +1,6 @@
 name: GoogleCNrewrite
 desc: Rewrite google.cn to google.com
-icon: https://raw.githubusercontent.com/RiverMud/Stash/master/Google.PNG
+icon: https://raw.githubusercontent.com/RiverMud/Stash/master/icon/Google.PNG
 category: "Google"
 
 http:
