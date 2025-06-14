@@ -1,14 +1,13 @@
 name: ADreject
 desc: Reject AD urls.
-icon: https://raw.githubusercontent.com/RiverMud/Stash/master/cancel.PNG
+icon: https://raw.githubusercontent.com/RiverMud/Stash/master/icon/cancel.PNG
 category: "AD"
 
 rule-providers:
   AD-domain:
     behavior: domain
-    format: yaml
     url: https://cdn.jsdmirror.cn/gh/Loyalsoldier/clash-rules@release/reject.txt
     interval: 86400
 
-rules:
++rules:
   - RULE-SET,AD-domain,REJECT
