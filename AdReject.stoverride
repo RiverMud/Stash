@@ -4,7 +4,7 @@ icon: https://raw.githubusercontent.com/RiverMud/Stash/refs/heads/master/icon/ca
 category: "AdReject"
 
 rule-providers:
-  ad-domain:
+  ad-domains:
     behavior: domain
     format: yaml
     interval: 86400
