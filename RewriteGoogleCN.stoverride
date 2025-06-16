@@ -5,7 +5,9 @@ category: Google
 
 http:
   mitm:
+    - g.cn
     - "*.g.cn"
+    - google.cn
     - "*.google.cn"
 
   url-rewrite:
