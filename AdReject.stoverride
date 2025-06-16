@@ -11,8 +11,6 @@ rule-providers:
     type: http
     url: https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-clash.yaml
 
-http:
-
 rules:
   - GEOSITE,category-ads,REJECT
   - RULE-SET,ad-domains,REJECT
