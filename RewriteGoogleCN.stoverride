@@ -1,7 +1,7 @@
 name: RewriteGoogleCN
 desc: Rewrite GoogleCN URLs to Google.
 icon: https://raw.githubusercontent.com/RiverMud/Stash/master/icon/Google.PNG
-category: "Google"
+category: Google
 
 http:
   mitm:
