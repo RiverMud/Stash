@@ -5,10 +5,8 @@ category: Google
 
 http:
   mitm:
-    - g.cn
-    - "*.g.cn"
-    - google.cn
-    - "*.google.cn"
+    - *.g.cn
+    - *.google.cn
 
   url-rewrite:
     - ^https?://(www.)?g.cn https://www.google.com 302
