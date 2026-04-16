@@ -1,0 +1,16 @@
+name: AntiAd
+desc: Use Loyalsoldier ruleset to block ad domains.
+icon: https://raw.githubusercontent.com/RiverMud/Stash/refs/heads/master/AntiAd.png
+category: AntiAd
+version: 1.0
+
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
+rules:
+  - RULE-SET,reject,REJECT
