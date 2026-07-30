@@ -1,6 +1,6 @@
 name: AntiAd
 desc: Use Loyalsoldier ruleset to block ad domains.
-icon: https://raw.githubusercontent.com/RiverMud/Stash/refs/heads/master/AntiAd.png
+icon: https://raw.githubusercontent.com/RiverMud/Stash/refs/heads/master/Reject.png
 category: AntiAd
 
 rule-providers:
