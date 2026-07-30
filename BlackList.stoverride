@@ -1,0 +1,128 @@
+name: BlackList
+desc: 基于 Loyalsoldier 规则集及原 Shadowrocket 配置转换的 Stash 覆写文件
+
+ipv6: true
+
+# 【DNS 配置】
+dns:
+  enable: true
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    "domain:apple.com": system
+    "domain:icloud.com": system
+
+# 主机名配置
+hosts:
+  'localhost': 127.0.0.1
+
+# 【TUN 路由配置】
+tun:
+  enable: true
+  route:
+    exclude:
+      - 10.0.0.0/8
+      - 100.64.0.0/10
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 172.16.0.0/12
+      - 192.0.0.0/24
+      - 192.0.2.0/24
+      - 192.88.99.0/24
+      - 192.168.0.0/16
+      - 198.51.100.0/24
+      - 203.0.113.0/24
+      - 224.0.0.0/4
+      - 255.255.255.255/32
+      - 239.255.255.250/32
+
+# 【外部规则集定义】(使用 clash-rules 仓库)
+rule-providers: #!replace
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/loyalsoldier/reject.txt
+    interval: 86400
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/loyalsoldier/gfw.txt
+    interval: 86400
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/loyalsoldier/proxy.txt
+    interval: 86400
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/loyalsoldier/telegramcidr.txt
+    interval: 86400
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/loyalsoldier/private.txt
+    interval: 86400
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/loyalsoldier/direct.txt
+    interval: 86400
+  apple:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    path: ./ruleset/loyalsoldier/apple.txt
+    interval: 86400
+  icloud:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+    path: ./ruleset/loyalsoldier/icloud.txt
+    interval: 86400
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/loyalsoldier/cncidr.txt
+    interval: 86400
+
+# 【路由规则】
+rules: #!replace
+  # 直连列表
+  - DOMAIN-SUFFIX,local,DIRECT
+  - DOMAIN,captive.apple.com,DIRECT
+  - DOMAIN-SUFFIX,ccb.com,DIRECT
+  - DOMAIN-SUFFIX,abchina.com.cn,DIRECT
+  - DOMAIN-SUFFIX,psbc.com,DIRECT
+  - DOMAIN,www.baidu.com,DIRECT
+  - DOMAIN,www.163.com,DIRECT
+
+  # 外部规则集分流
+  - RULE-SET,reject,REJECT
+  - RULE-SET,gfw,PROXY
+  - RULE-SET,proxy,PROXY
+  - RULE-SET,telegramcidr,PROXY
+  - RULE-SET,private,DIRECT
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,icloud,DIRECT
+  - RULE-SET,cncidr,DIRECT
+
+  # GEOIP 兜底
+  - GEOIP,PRIVATE,DIRECT
+  - GEOIP,CN,DIRECT
+
+  # 最终兜底
+  - MATCH,DIRECT
