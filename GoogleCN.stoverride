@@ -1,0 +1,12 @@
+name: GoogleCN
+desc: GoogleCN URL Rewrite.
+icon: https://raw.githubusercontent.com/RiverMud/Stash/refs/heads/master/GoogleCN.png
+category: Rewrite
+
+http:
+    mitm:
+        - www.google.cn
+    force-http-engine:
+        - www.google.cn
+    url-rewrite:
+        - https://www.google.cn https://www.google.com 302
