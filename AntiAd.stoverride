@@ -7,8 +7,9 @@ rule-providers:
   reject:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
-    path: ./ruleset/reject.yaml
+    format: text
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/reject.txt"
+    path: ./rules/reject.txt
     interval: 86400
 
 rules:
