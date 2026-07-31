@@ -7,4 +7,4 @@ http:
     mitm:
         - www.google.cn
     url-rewrite:
-        - '^https://www\.google\.cn($|/) https://www.google.com/ 307'
+        - '^https://www\.google\.cn(/.*)?$ https://www.google.com$1 307'
