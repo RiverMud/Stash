@@ -1,0 +1,176 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+
+http:
+  mitm:
+    - www.google.cn
+  url-rewrite:
+    - '^https://www\.google\.cn(/.*)?$ https://www.google.com$1 307'
+
+dns:
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  follow-rule: false
+  skip-cert-verify: false
+  nameserver-policy:
+    "+.apple.com": system
+    "+.icloud.com": system
+  fake-ip-filter:
+    - localhost
+    - "+.local"
+    - "+.lan"
+    - captive.apple.com
+
+hosts:
+  localhost: 127.0.0.1
+
+proxy-providers:
+  JMS-NODES:
+    type: http
+    path: ./providers/jms-nodes.yaml
+    interval: 28800
+
+proxy-groups:
+- name: "Just My Socks"
+  type: select
+  icon: "https://raw.githubusercontent.com/RiverMud/Stash/refs/heads/master/Proxy.png"
+  use:
+  - JMS-NODES
+  interval: -1
+
+- name: "🇺🇸 美国 s1｜Shadowsocks"
+  type: select
+  use:
+  - JMS-NODES
+  filter: 'c15s1'
+  interval: -1
+
+- name: "🇺🇸 美国 s2｜VLESS"
+  type: select
+  use:
+  - JMS-NODES
+  filter: 'c15s2'
+  interval: -1
+
+- name: "🇺🇸 美国 s3｜VLESS"
+  type: select
+  use:
+  - JMS-NODES
+  filter: 'c15s3'
+  interval: -1
+
+- name: "🇯🇵 日本 s4｜VLESS"
+  type: select
+  use:
+  - JMS-NODES
+  filter: 'c15s4'
+  interval: -1
+
+- name: "🇳🇱 荷兰 s5｜VLESS"
+  type: select
+  use:
+  - JMS-NODES
+  filter: 'c15s5'
+  interval: -1
+
+- name: "🇺🇸 美国 s801｜VLESS"
+  type: select
+  use:
+  - JMS-NODES
+  filter: 'c15s801'
+  interval: -1
+
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    format: text
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/reject.txt"
+    path: ./rules/reject.txt
+    interval: 86400
+
+  private:
+    type: http
+    behavior: domain
+    format: text
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/private.txt"
+    path: ./rules/private.txt
+    interval: 86400
+
+#  direct:
+#    type: http
+#    behavior: domain
+#    format: text
+#    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/direct.txt"
+#    path: ./rules/direct.txt
+#    interval: 86400
+
+  apple:
+    type: http
+    behavior: domain
+    format: text
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/apple.txt"
+    path: ./rules/apple.txt
+    interval: 86400
+
+  icloud:
+    type: http
+    behavior: domain
+    format: text
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/icloud.txt"
+    path: ./rules/icloud.txt
+    interval: 86400
+
+  gfw:
+    type: http
+    behavior: domain
+    format: text
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/gfw.txt"
+    path: ./rules/gfw.txt
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: domain
+    format: text
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/proxy.txt"
+    path: ./rules/proxy.txt
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    format: yaml
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./rules/telegramcidr.yaml
+    interval: 86400
+
+#  cncidr:
+#    type: http
+#    behavior: ipcidr
+#    format: yaml
+#    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+#    path: ./rules/cncidr.yaml
+#    interval: 86400
+
+rules:
+- RULE-SET,reject,REJECT
+- RULE-SET,private,DIRECT
+#  - RULE-SET,direct,DIRECT
+- RULE-SET,apple,DIRECT
+- RULE-SET,icloud,DIRECT
+- RULE-SET,gfw,Just My Socks
+- RULE-SET,proxy,Just My Socks
+- RULE-SET,telegramcidr,Just My Socks
+#  - RULE-SET,cncidr,DIRECT
+#  - GEOIP,PRIVATE,DIRECT
+#  - GEOIP,CN,DIRECT
+- MATCH,DIRECT
